@@ -48,7 +48,7 @@ An FPGA is composed of:
 - **DSP** - Fast arithmetic operations
 - Timing is done by PLLs (Phase-Locked Loops) and DLLs (Delay-Locked loops)
 This specific FPGA comes with the following features:
-![DE10-Lite FPGA overview](./images/altera_max10.png)
+![DE10-Lite FPGA overview](../lab1/images/altera_max10.png)
 
 This task is concerned with testing the fpga and ensuring that it functions as expected.
 This is done by running [`lab1task1_sol.sof`](./task0/lab1task1_sol.sof).  
@@ -93,12 +93,12 @@ This tests the code and generates the `.sof` bit-stream file.
 We can View the graphical view of the synthesised design. 
 This is shown by `Tools > Netlist Viewers > RTL Viewer` 
 Thus showing:
-![](./images/rtl_view.png)
+![](../lab1/images/rtl_view.png)
 
 The left side shows the inputs, switches 3 to 0 with 3 being the MS.
 The right side showing the outputs (7 seg display).
 We can see this in more detail by clicking on it:
-![](./images/rtlExpanded.png)
+![](../lab1/images/rtlExpanded.png)
 
 Looking at the Technology Map Viewer post mapping, we can see that only 1 7 segment display is being used and every bar is determined by this with 0 at the top, going clockwise and 6 in the centre.
 We notice that every cell has a combination of the switches through gatewise manipulation. For the first cell this is: `OUT = A & (D # B $ C) # !A & (B # C $ D)`:

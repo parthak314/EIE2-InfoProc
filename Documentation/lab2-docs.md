@@ -15,7 +15,7 @@ In this lab, we are using the 32-bit NIOS II soft-core processor which is implem
 
 Soft-core processors have customisable architecture, as opposed to fixed architecture in hard-core processors. The processor architecture contains Register files, ALU, iCache and dCache, Instruction decoding and Instruction bus and data bus.
 This is similar to the Harvard architecture of a processor with Instruction and Data kept separate. 
-![NiosII-Processor.png](./images/NiosII-Processor.png)
+![NiosII-Processor.png](../lab2/images/NiosII-Processor.png)
 
 The blue boxes show the essential components:
 - Instruction-fetch-decode logic
@@ -49,25 +49,25 @@ Initially, we aim to build a system with a clock and a single master (the Nios I
 
 ### Adding an NIOS II Processor
 We begin by launching the Platform Designer inside Quartus via `Tools > Platform designer`.
-![platform-designer.png](./images/platform-designer.png)
+![platform-designer.png](../lab2/images/platform-designer.png)
 This automatically opens with the clock module as `clk_0`
 Here we find the Nios II Processor through the IP catalog.
 This opens a panel with more details. (Here we use Nios II/e)
 > Note that Nios II has several versions with /e (economy), /f (fast) and /s (standard)
 
 This also shows an image of the soft processor architecture:
-![](./images/NiosII-processor-block.png)
+![](../lab2/images/NiosII-processor-block.png)
 To connect this with the rest of our processor, we can simply draw lines in the connections column, but it is easier to do this with all the components present.
 
 ### Adding other components
 We still need to add:
 - On Chip Memory 
 	- Uninitialised memory content for `On-Chip Memory (RAM or ROM) Intel FPGA IP` with size `65536` bytes.
-	 ![on-chip memory.png](./images/on-chip-memory.png)
+	 ![on-chip memory.png](../lab2/images/on-chip-memory.png)
 	 > Avalon is a combination of control signals such as instruction and data for reading and writing.
 - JTAG UART
 	- `JTAG UART Intel FPGA IP` is used for the debugging interface and communication via the terminal.
-	 ![Jtag UART](./images/jtag-uart.png)
+	 ![Jtag UART](../lab2/images/jtag-uart.png)
 - Parallel IO (PIO) which handles:
 	- Pushbutton Inputs (`pio_0`)
 		- 4-bit input interface (2 push buttons and 2 internal signals)
@@ -80,7 +80,7 @@ We still need to add:
 Since our processor on the DE10-Lite board contains this instrumentation.
 
 ### Connecting all components together
-![Nios II system](./images/NiosII-System.png)
+![Nios II system](../lab2/images/NiosII-System.png)
 
 We have added all the connections and duplicated the 7 segment displays. 
 In addition, we have exported the conduit for the Parallel I/O connectors that allow us to use these and address them in the top level design (HDL).
@@ -89,7 +89,7 @@ To make debugging easier later on, we also make use of the `System ID Peripheral
 
 We also assign the base addresses.
 
-![](./images/complete-nios-system.png)
+![](../lab2/images/complete-nios-system.png)
 ### Managing Errors
 Currently we also see 2 errors. These are for Reset Slave is not specified and the exception slave is not specified.
 To fix this, we can go to the vectors tab of the cpu and set the `reset vector memory` and `exception vector memory` to `onchip_memory.s1` . This sets the system to execute from the onchip memory, thus resolving the memory issues.
@@ -122,7 +122,7 @@ We can finally compile this which also runs Analysis/Synthesis, Fitter, Assemble
 In other words, it places and route the script for the FPGA, generates the programming image and the static time analyser.
 
 This takes ~6 minutes and results in the following compilation report (flow summary)
-![](./images/niosii-compilation.png)
+![](../lab2/images/niosii-compilation.png)
 
 ---
 ## Task 2: Programming an NIOS II System
@@ -188,11 +188,11 @@ if (switch_datain == 0b0000000000) {
 		}
 ```
 And this works as expected with the following output in the Nios II console:
-![](./images/stdout-testing.png)
+![](../lab2/images/stdout-testing.png)
 
 The LEDs corresponding to each button can be shown here:
 
-| ![](./images/task2-LED1.jpg) | ![](./images/task2-LED2.jpg) |
+| ![](../lab2/images/task2-LED1.jpg) | ![](../lab2/images/task2-LED2.jpg) |
 | ---------------------------- | ---------------------------- |
 
 ---
@@ -227,4 +227,4 @@ else if (switch_datain & 0b10) {
 We can also add in a delay by defining a constant and then use `usleep()` for delaying in microseconds.
 
 Now we have the following patterns displayed:
-![LEDtest.mp4](./images/LEDtest.mp4)
+![LEDtest.mp4](../lab2/images/LEDtest.mp4)
