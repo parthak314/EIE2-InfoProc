@@ -1,0 +1,41 @@
+#include <sys/alt_stdio.h>
+#include <stdio.h>
+#include "altera_avalon_pio_regs.h"
+#include "system.h"
+#include <unistd.h>
+
+#define DELAY 100000 //us = 200ms
+
+int main()
+{
+	int switch_datain = 0;
+	int led_pattern[10] = {
+			0b0000000001,
+			0b0000000010,
+			0b0000000100,
+			0b0000001000,
+			0b0000010000,
+			0b0000100000,
+			0b0001000000,
+			0b0010000000,
+			0b0100000000,
+			0b1000000000
+	};
+	int pattern_index = 0;
+
+	while (1)
+	{
+		switch_datain = ~IORD_ALTERA_AVALON_PIO_DATA(BUTTON_BASE);
+		switch_datain &= (0b0000000011);
+		if (switch_datain & 0b01) {
+			IOWR_ALTERA_AVALON_PIO_DATA(LED_BASE,led_pattern[pattern_index]);
+			pattern_index = (pattern_index + 1) % 10;
+			usleep(DELAY);
+		}
+		else {
+			IOWR_ALTERA_AVALON_PIO_DATA(LED_BASE,0b0000000000);
+		}
+
+	}
+	return 0;
+}

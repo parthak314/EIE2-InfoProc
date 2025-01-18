@@ -67,6 +67,20 @@ module DE10_LITE_Golden_Top(
 //=======================================================
 //  REG/WIRE declarations
 //=======================================================
+	nios_setup_v2 system (
+		.clk_clk                           (MAX10_CLK1_50),  // clk.clk
+		.reset_reset_n                     (1'b1),           // reset.reset_n
+		.button_external_connection_export (KEY[1:0]),       // button_external_connection.export
+		.switch_external_connection_export (SW[9:0]),        // switch_external_connection.export
+		.led_external_connection_export    (LEDR[9:0]),      // led_external_connection.export
+		.hex0_external_connection_export   (HEX0),           // hex0_external_connection.export
+		.hex1_external_connection_export   (HEX1),           // hex1_external_connection.export
+		.hex2_external_connection_export   (HEX2),           // hex2_external_connection.export
+		.hex3_external_connection_export   (HEX3),           // hex3_external_connection.export
+		.hex4_external_connection_export   (HEX4),           // hex4_external_connection.export
+		.hex5_external_connection_export   (HEX5)            // hex5_external_connection.export
+	);
+
 
 
 
