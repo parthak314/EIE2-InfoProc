@@ -9,9 +9,7 @@ Also see the [Hello_World_Lab_Manual](./Hello_World_Lab_Manual_DE10_Lite.pdf)
 5. Task 3: Extension & Challenges
 6. Troubleshooting and issues encountered
 ---
-## ==Subdirectory Structure==
 
----
 ## Background
 In this lab, we are using the 32-bit NIOS II soft-core processor which is implemented in the FPGA fabric.
 
