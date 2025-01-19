@@ -3,9 +3,9 @@ This involves the design, programming, and testing of an embedded system, levera
 Also see the [Hello_World_Lab_Manual](./Hello_World_Lab_Manual_DE10_Lite.pdf)
 ## Table of Contents
 1. [Background](background)
-2. [Task 1: Designing an NIOS II System](task-1-designing-an-nios-ii-system)
-3. Task 2: Programming an NIOS II System =
-4. Task 3: Extension & Challenges
+2. [Task 1: Designing an NIOS II System](#task-1-designing-an-nios-ii-system)
+3. [Task 2: Programming an NIOS II System](#task-2-programming-an-nios-ii-system)
+4. [Task 3: Extension & Challenges](#task-3-extension-and-challenges)
 ---
 
 ## Background
