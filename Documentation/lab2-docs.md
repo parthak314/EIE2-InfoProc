@@ -2,12 +2,10 @@ This lab focuses on the process of designing and deploying a **NIOS II system**,
 This involves the design, programming, and testing of an embedded system, leveraging the capabilities of the NIOS II system.
 Also see the [Hello_World_Lab_Manual](./Hello_World_Lab_Manual_DE10_Lite.pdf)
 ## Table of Contents
-1. Subdirectory structure
-2. Background
-3. Task 1: Designing an NIOS II System
-4. Task 2: Programming an NIOS II System
-5. Task 3: Extension & Challenges
-6. Troubleshooting and issues encountered
+1. [Background](background)
+2. [Task 1: Designing an NIOS II System](task-1-designing-an-nios-ii-system)
+3. Task 2: Programming an NIOS II System =
+4. Task 3: Extension & Challenges
 ---
 
 ## Background
