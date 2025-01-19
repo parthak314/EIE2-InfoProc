@@ -56,14 +56,18 @@ This opens a panel with more details. (Here we use Nios II/e)
 > Note that Nios II has several versions with /e (economy), /f (fast) and /s (standard)
 
 This also shows an image of the soft processor architecture:
+
 ![](../lab2/images/NiosII-processor-block.png)
+
 To connect this with the rest of our processor, we can simply draw lines in the connections column, but it is easier to do this with all the components present.
 
 ### Adding other components
 We still need to add:
 - On Chip Memory 
 	- Uninitialised memory content for `On-Chip Memory (RAM or ROM) Intel FPGA IP` with size `65536` bytes.
-	 ![on-chip memory.png](../lab2/images/on-chip-memory.png)
+
+    ![on-chip memory.png](../lab2/images/on-chip-memory.png)
+
 	 > Avalon is a combination of control signals such as instruction and data for reading and writing.
 - JTAG UART
 	- `JTAG UART Intel FPGA IP` is used for the debugging interface and communication via the terminal.
@@ -188,6 +192,7 @@ if (switch_datain == 0b0000000000) {
 		}
 ```
 And this works as expected with the following output in the Nios II console:
+
 ![](../lab2/images/stdout-testing.png)
 
 The LEDs corresponding to each button can be shown here:
@@ -199,7 +204,7 @@ The LEDs corresponding to each button can be shown here:
 ## Task 3: Extension and Challenges
 Now we can make changes to the `hello_world.c` program to light up the LEDs in sequence.
 
-Looking at the `system.h` file, we can see that the base of other Parallel Input/Output devices follows the same pattern as the provided switch and LEDs. 
+Looking at the `system.h` file, we can see that the base of other Parallel Input/Output devices follows the same pattern as the provided button and LEDs. 
 Creating a pattern for the LED, we can have a circulating pattern with a series of 1s and 0s.
 The implementation is simply:
 ```C
