@@ -37,7 +37,7 @@ Synchronous Serial communication for short distances especially for low-speed de
 Here, JTAG UART (Joint Test Action Group UART) is used for communication between the FPGA and Nios II system since it does not require the physical board for connections. 
 
 Using SPI here means that it has high speed capabilities with a simple handshake with 4 buses to streamline communication. (Bidirectional with low packet loss)
-![](../lab3/images/spi-comms.png) 
+![](../lab3/images/SPI-comms.png) 
 
 The accelerometer values can be read by using a `LookUp()` function, and `convert_read()` to convert the x_value to led and level pair:
 ```C
