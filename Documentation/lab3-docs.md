@@ -1,11 +1,11 @@
 The aim for this lab is to, again, develop an NIOS II system but using SPI this time. In addition, we will make use of the accelerometer and read values from this, processed by a low-pass FIR.
 
 ## Table of Contents
-1. Background
-2. Task 1: Interface an accelerometer to a NIOS II system
-3. Task 2: Understanding of the code
-4. Task 3: Implementing an FIR filter to process data
-5. Challenge: FIR optimisation
+1. [Background](#background)
+2. [Task 1: Interface an accelerometer to a NIOS II system](#task-1-interface-an-accelerometer-to-a-nios-ii-system)
+3. [Task 2: Understanding of the code](#task-2-understanding-of-the-code)
+4. [Task 3: Implementing an FIR filter to process data](#task-3-implementing-an-fir-filter-to-process-data)
+5. [Challenge: FIR optimisation](#challenge-fir-optimisation)
 
 ---
 ## Background
@@ -78,7 +78,9 @@ We begin by opening the provided `.qpf` file in Quartus and adding the following
 - PIO for LED
 - Interval Timer
 - Accelerometer SPI mode
-	 ![](../lab3/images/accelerometer-spi.png)
+
+  ![](../lab3/images/accelerometer-spi.png)
+  
 Refer to [lab2-docs](./lab2-docs.md) for more detail on this.
 Assigning base addresses, handling errors (reset vector memory and exception vector memory) gives:
 ![](../lab3/images/nios-accelerometer.png)
@@ -107,6 +109,7 @@ SPI is evident here due to `SDI` (Serial Data In) and `SCLK` (Serial Clock) from
 We can go to `Project > Add/Remove Files in Project` and add the `nios_accelerometer.qsys` files.
 
 Compiling the design produces this flow summary:
+
 ![](../lab3/images/flow-summary.png)
 
 Now to set up Eclipse:
@@ -161,6 +164,7 @@ Then we perform the bitwise OR between `0b1000` right shifted by `val` and `0b10
 | 0001        | 0001 0000 0000   | 0001 0000 0001  |
 | 0000 . 1000 | 1000 0000        | 1000 000 . 1000 |
 | ...         | ...              | ...             |
+
 This shows a symmetric pattern forming.
 
 Finally we can determine the brightness by performing a right shift of the original value by 1 position, masking it with `0b0001 1111`.
@@ -183,8 +187,17 @@ Researching allows us to understand that and FIR filter works based on the dot p
 ![](../lab3/images/fir-filter-diagram.png)
 
 $$output = \bf{buffer} \cdot \bf{coefficients} = \begin{bmatrix} 
-RecentVal1\\ RecentVal2\\ RecentVal3\\ RecentVal4\\ RecentVal5 \end{bmatrix} \cdot \begin{bmatrix} 
-0.2 \\ 0.2 \\ 0.2 \\ 0.2 \\ 0.2 \end{bmatrix}$$
+RecentVal1\\ 
+RecentVal2\\ 
+RecentVal3\\ 
+RecentVal4\\ 
+RecentVal5 \end{bmatrix} \cdot \begin{bmatrix} 
+0.2 \\ 
+0.2 \\ 
+0.2 \\ 
+0.2 \\ 
+0.2 \end{bmatrix}$$
+
 https://flylib.com/books/en/2.729.1/convolution_in_fir_filters.html
 
 This is equivalent to the discrete convolution between the filter coefficients and the input signal values.
