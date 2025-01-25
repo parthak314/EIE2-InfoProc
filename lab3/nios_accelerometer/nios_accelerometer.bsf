@@ -84,7 +84,7 @@ refer to the applicable agreement for further details.
 		(text "export" (rect 309 195 654 400)(font "Arial" (color 0 0 0)))
 		(text "reset" (rect 275 211 580 435)(font "Arial" (color 128 0 0)(font_size 9)))
 		(text "reset_n" (rect 309 235 660 480)(font "Arial" (color 0 0 0)))
-		(text " nios_accelerometer " (rect 633 256 1386 522)(font "Arial" ))
+		(text " system " (rect 685 256 1418 522)(font "Arial" ))
 		(line (pt 304 32)(pt 416 32)(line_width 1))
 		(line (pt 416 32)(pt 416 256)(line_width 1))
 		(line (pt 304 256)(pt 416 256)(line_width 1))

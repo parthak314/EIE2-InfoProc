@@ -5,11 +5,11 @@
  version="1.0"
  fabric="QSYS">
  <!-- Format version 18.1 625 (Future versions may contain additional information.) -->
- <!-- 2025.01.20.17:27:45 -->
+ <!-- 2025.01.24.19:00:07 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_GENERATION_ID">
   <type>java.lang.Integer</type>
-  <value>1737394065</value>
+  <value>1737745207</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>false</visible>
@@ -769,7 +769,7 @@ parameters are a RESULT of the module parameters. -->
    </port>
   </interface>
  </module>
- <module name="clk" kind="clock_source" version="18.1" path="clk">
+ <module name="clk_0" kind="clock_source" version="18.1" path="clk_0">
   <!-- Describes a single module. Module parameters are
 the requested settings for a module instance. -->
   <parameter name="clockFrequency">
@@ -1012,12 +1012,6 @@ parameters are a RESULT of the module parameters. -->
    </clockDomainMember>
    <clockDomainMember>
     <isBridge>false</isBridge>
-    <moduleName>jtag_uart</moduleName>
-    <slaveName>clk</slaveName>
-    <name>jtag_uart.clk</name>
-   </clockDomainMember>
-   <clockDomainMember>
-    <isBridge>false</isBridge>
     <moduleName>led</moduleName>
     <slaveName>clk</slaveName>
     <name>led.clk</name>
@@ -1027,6 +1021,12 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>timer</moduleName>
     <slaveName>clk</slaveName>
     <name>timer.clk</name>
+   </clockDomainMember>
+   <clockDomainMember>
+    <isBridge>false</isBridge>
+    <moduleName>jtag_uart</moduleName>
+    <slaveName>clk</slaveName>
+    <name>jtag_uart.clk</name>
    </clockDomainMember>
    <clockDomainMember>
     <isBridge>false</isBridge>
@@ -3805,21 +3805,21 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>accelerometer_spi</moduleName>
     <slaveName>interrupt</slaveName>
     <name>accelerometer_spi.interrupt</name>
-    <interruptNumber>1</interruptNumber>
-   </interrupt>
-   <interrupt>
-    <isBridge>false</isBridge>
-    <moduleName>timer</moduleName>
-    <slaveName>irq</slaveName>
-    <name>timer.irq</name>
-    <interruptNumber>0</interruptNumber>
+    <interruptNumber>2</interruptNumber>
    </interrupt>
    <interrupt>
     <isBridge>false</isBridge>
     <moduleName>jtag_uart</moduleName>
     <slaveName>irq</slaveName>
     <name>jtag_uart.irq</name>
-    <interruptNumber>2</interruptNumber>
+    <interruptNumber>0</interruptNumber>
+   </interrupt>
+   <interrupt>
+    <isBridge>false</isBridge>
+    <moduleName>timer</moduleName>
+    <slaveName>irq</slaveName>
+    <name>timer.irq</name>
+    <interruptNumber>1</interruptNumber>
    </interrupt>
   </interface>
   <interface name="debug_reset_request" kind="reset_source" version="18.1">
@@ -7923,10 +7923,10 @@ parameters are a RESULT of the module parameters. -->
   <endConnectionPoint>s1</endConnectionPoint>
  </connection>
  <connection
-   name="clk.clk/cpu.clk"
+   name="clk_0.clk/cpu.clk"
    kind="clock"
    version="18.1"
-   start="clk.clk"
+   start="clk_0.clk"
    end="cpu.clk">
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
@@ -7944,43 +7944,16 @@ parameters are a RESULT of the module parameters. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
-  <startModule>clk</startModule>
+  <startModule>clk_0</startModule>
   <startConnectionPoint>clk</startConnectionPoint>
   <endModule>cpu</endModule>
   <endConnectionPoint>clk</endConnectionPoint>
  </connection>
  <connection
-   name="clk.clk/jtag_uart.clk"
+   name="clk_0.clk/led.clk"
    kind="clock"
    version="18.1"
-   start="clk.clk"
-   end="jtag_uart.clk">
-  <parameter name="deviceFamily">
-   <type>java.lang.String</type>
-   <value>UNKNOWN</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="generateLegacySim">
-   <type>boolean</type>
-   <value>false</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <startModule>clk</startModule>
-  <startConnectionPoint>clk</startConnectionPoint>
-  <endModule>jtag_uart</endModule>
-  <endConnectionPoint>clk</endConnectionPoint>
- </connection>
- <connection
-   name="clk.clk/led.clk"
-   kind="clock"
-   version="18.1"
-   start="clk.clk"
+   start="clk_0.clk"
    end="led.clk">
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
@@ -7998,16 +7971,16 @@ parameters are a RESULT of the module parameters. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
-  <startModule>clk</startModule>
+  <startModule>clk_0</startModule>
   <startConnectionPoint>clk</startConnectionPoint>
   <endModule>led</endModule>
   <endConnectionPoint>clk</endConnectionPoint>
  </connection>
  <connection
-   name="clk.clk/timer.clk"
+   name="clk_0.clk/timer.clk"
    kind="clock"
    version="18.1"
-   start="clk.clk"
+   start="clk_0.clk"
    end="timer.clk">
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
@@ -8025,16 +7998,43 @@ parameters are a RESULT of the module parameters. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
-  <startModule>clk</startModule>
+  <startModule>clk_0</startModule>
   <startConnectionPoint>clk</startConnectionPoint>
   <endModule>timer</endModule>
   <endConnectionPoint>clk</endConnectionPoint>
  </connection>
  <connection
-   name="clk.clk/accelerometer_spi.clk"
+   name="clk_0.clk/jtag_uart.clk"
    kind="clock"
    version="18.1"
-   start="clk.clk"
+   start="clk_0.clk"
+   end="jtag_uart.clk">
+  <parameter name="deviceFamily">
+   <type>java.lang.String</type>
+   <value>UNKNOWN</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="generateLegacySim">
+   <type>boolean</type>
+   <value>false</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <startModule>clk_0</startModule>
+  <startConnectionPoint>clk</startConnectionPoint>
+  <endModule>jtag_uart</endModule>
+  <endConnectionPoint>clk</endConnectionPoint>
+ </connection>
+ <connection
+   name="clk_0.clk/accelerometer_spi.clk"
+   kind="clock"
+   version="18.1"
+   start="clk_0.clk"
    end="accelerometer_spi.clk">
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
@@ -8052,16 +8052,16 @@ parameters are a RESULT of the module parameters. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
-  <startModule>clk</startModule>
+  <startModule>clk_0</startModule>
   <startConnectionPoint>clk</startConnectionPoint>
   <endModule>accelerometer_spi</endModule>
   <endConnectionPoint>clk</endConnectionPoint>
  </connection>
  <connection
-   name="clk.clk/onchip_memory.clk1"
+   name="clk_0.clk/onchip_memory.clk1"
    kind="clock"
    version="18.1"
-   start="clk.clk"
+   start="clk_0.clk"
    end="onchip_memory.clk1">
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
@@ -8079,7 +8079,7 @@ parameters are a RESULT of the module parameters. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
-  <startModule>clk</startModule>
+  <startModule>clk_0</startModule>
   <startConnectionPoint>clk</startConnectionPoint>
   <endModule>onchip_memory</endModule>
   <endConnectionPoint>clk1</endConnectionPoint>
@@ -8092,7 +8092,7 @@ parameters are a RESULT of the module parameters. -->
    end="accelerometer_spi.interrupt">
   <parameter name="irqNumber">
    <type>int</type>
-   <value>1</value>
+   <value>2</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -8120,11 +8120,11 @@ parameters are a RESULT of the module parameters. -->
   <endConnectionPoint>interrupt</endConnectionPoint>
  </connection>
  <connection
-   name="cpu.irq/timer.irq"
+   name="cpu.irq/jtag_uart.irq"
    kind="interrupt"
    version="18.1"
    start="cpu.irq"
-   end="timer.irq">
+   end="jtag_uart.irq">
   <parameter name="irqNumber">
    <type>int</type>
    <value>0</value>
@@ -8151,18 +8151,18 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <startModule>cpu</startModule>
   <startConnectionPoint>irq</startConnectionPoint>
-  <endModule>timer</endModule>
+  <endModule>jtag_uart</endModule>
   <endConnectionPoint>irq</endConnectionPoint>
  </connection>
  <connection
-   name="cpu.irq/jtag_uart.irq"
+   name="cpu.irq/timer.irq"
    kind="interrupt"
    version="18.1"
    start="cpu.irq"
-   end="jtag_uart.irq">
+   end="timer.irq">
   <parameter name="irqNumber">
    <type>int</type>
-   <value>2</value>
+   <value>1</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -8186,14 +8186,14 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <startModule>cpu</startModule>
   <startConnectionPoint>irq</startConnectionPoint>
-  <endModule>jtag_uart</endModule>
+  <endModule>timer</endModule>
   <endConnectionPoint>irq</endConnectionPoint>
  </connection>
  <connection
-   name="clk.clk_reset/cpu.reset"
+   name="clk_0.clk_reset/cpu.reset"
    kind="reset"
    version="18.1"
-   start="clk.clk_reset"
+   start="clk_0.clk_reset"
    end="cpu.reset">
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
@@ -8211,16 +8211,16 @@ parameters are a RESULT of the module parameters. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
-  <startModule>clk</startModule>
+  <startModule>clk_0</startModule>
   <startConnectionPoint>clk_reset</startConnectionPoint>
   <endModule>cpu</endModule>
   <endConnectionPoint>reset</endConnectionPoint>
  </connection>
  <connection
-   name="clk.clk_reset/jtag_uart.reset"
+   name="clk_0.clk_reset/jtag_uart.reset"
    kind="reset"
    version="18.1"
-   start="clk.clk_reset"
+   start="clk_0.clk_reset"
    end="jtag_uart.reset">
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
@@ -8238,16 +8238,16 @@ parameters are a RESULT of the module parameters. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
-  <startModule>clk</startModule>
+  <startModule>clk_0</startModule>
   <startConnectionPoint>clk_reset</startConnectionPoint>
   <endModule>jtag_uart</endModule>
   <endConnectionPoint>reset</endConnectionPoint>
  </connection>
  <connection
-   name="clk.clk_reset/led.reset"
+   name="clk_0.clk_reset/led.reset"
    kind="reset"
    version="18.1"
-   start="clk.clk_reset"
+   start="clk_0.clk_reset"
    end="led.reset">
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
@@ -8265,16 +8265,16 @@ parameters are a RESULT of the module parameters. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
-  <startModule>clk</startModule>
+  <startModule>clk_0</startModule>
   <startConnectionPoint>clk_reset</startConnectionPoint>
   <endModule>led</endModule>
   <endConnectionPoint>reset</endConnectionPoint>
  </connection>
  <connection
-   name="clk.clk_reset/timer.reset"
+   name="clk_0.clk_reset/timer.reset"
    kind="reset"
    version="18.1"
-   start="clk.clk_reset"
+   start="clk_0.clk_reset"
    end="timer.reset">
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
@@ -8292,16 +8292,16 @@ parameters are a RESULT of the module parameters. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
-  <startModule>clk</startModule>
+  <startModule>clk_0</startModule>
   <startConnectionPoint>clk_reset</startConnectionPoint>
   <endModule>timer</endModule>
   <endConnectionPoint>reset</endConnectionPoint>
  </connection>
  <connection
-   name="clk.clk_reset/accelerometer_spi.reset"
+   name="clk_0.clk_reset/accelerometer_spi.reset"
    kind="reset"
    version="18.1"
-   start="clk.clk_reset"
+   start="clk_0.clk_reset"
    end="accelerometer_spi.reset">
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
@@ -8319,16 +8319,16 @@ parameters are a RESULT of the module parameters. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
-  <startModule>clk</startModule>
+  <startModule>clk_0</startModule>
   <startConnectionPoint>clk_reset</startConnectionPoint>
   <endModule>accelerometer_spi</endModule>
   <endConnectionPoint>reset</endConnectionPoint>
  </connection>
  <connection
-   name="clk.clk_reset/onchip_memory.reset1"
+   name="clk_0.clk_reset/onchip_memory.reset1"
    kind="reset"
    version="18.1"
-   start="clk.clk_reset"
+   start="clk_0.clk_reset"
    end="onchip_memory.reset1">
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
@@ -8346,7 +8346,7 @@ parameters are a RESULT of the module parameters. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
-  <startModule>clk</startModule>
+  <startModule>clk_0</startModule>
   <startConnectionPoint>clk_reset</startConnectionPoint>
   <endModule>onchip_memory</endModule>
   <endConnectionPoint>reset1</endConnectionPoint>

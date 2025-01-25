@@ -81,7 +81,7 @@ We begin by opening the provided `.qpf` file in Quartus and adding the following
 
   ![](../lab3/images/accelerometer-spi.png)
   
-Refer to [lab2-docs](./lab2-docs.md) for more detail on this.
+Refer to [lab2-docs](lab2-docs.md) for more detail on this.
 Assigning base addresses, handling errors (reset vector memory and exception vector memory) gives:
 ![](../lab3/images/nios-accelerometer.png)
 We can now generate the HDL and add this into our project in Quartus.
@@ -243,19 +243,174 @@ To determine the coefficients, we can either use Matlab or make use of the pytho
 Looking at the `firwin()` function, we can use this to design an fir filter with the required coefficients.
 This has the parameters `def firwin(numtaps, cutoff, fs, ...)` from the scipy documentation.
 
-For this we need to identify the number of taps (given as an input, `n`), sampling frequency and cutoff. From the diagram provided, we known this is 300 Hz, by inspection. The sampling frequency needs to match the accelerometer's SPI clock frequency which we can find from the output data rate parameter in the datasheet for [Analog Devices' ADXL345](https://www.analog.com/media/en/technical-documentation/data-sheets/adxl345.pdf). Considering the Nyquist Sampling theorem, the $ODR > 2f_{cutoff}$ so it must be at ==::800, 1600, 3200 Hz::== 
+For this we need to identify the number of taps (given as an input, `n`), sampling frequency and cutoff. From the diagram provided, we known this is 300 Hz, by inspection. The sampling frequency needs to match the accelerometer's SPI clock frequency which we can find from the output data rate parameter in the datasheet for [Analog Devices' ADXL345](https://www.analog.com/media/en/technical-documentation/data-sheets/adxl345.pdf). Considering the Nyquist Sampling theorem, the $ODR > 2f_{cutoff}$. We can determine this by taking a look at the code provided in the challenge:
+```C
+# include “alt_types.h”
+# include “sys/times.h”
+…
+clock_t exec_t1, exec_t2;
+exec_t1 = times(NULL); // get system time before starting the process
+
+// The code that you want to time goes here
+// some code…
+// till here
+exec_t2 = times(NULL); // get system time after finishing the process
+printf(" proc time = %d ticks \n", int(exec_t2-exec_t1));
+```
+This will take the system time before and after the process and output this to the user. We also need to specify this in the BSP by `BSP (right click) > NIOSII > BSP editor > Main > Settings > common > hal > timestamp_timer` and setting the value to timer. Then regenerate the BSP.
 
 ```python
 from scipy.signal import firwin
 
 num_taps = 5
-fs = 1600
-cutoff = 300
+fs = 1600 # Sampling Rate
+cutoff = 300 # Passband frequency
 
 coefficients = firwin(num_taps, cutoff, fs=fs)
 print(coefficients)
 ```
 produces the output `[0.01266958 0.22347362 0.52771361 0.22347362 0.01266958]`.
 
+[../lab3/coefficients2.py](../lab3/coefficients2.py)
+We can take a step further to achieve more accurate results by using the parameters provided with the matlab script to consider the following high level specifications for the low-pass FIR/Chebyshev filter:
+- Sampling Rate: 1600 Hz
+- Passband Frequency = 300 Hz
+- Stopband Frequency = 350 Hz
+- Passband ripple = 0.5
+- Stopband ripple = 65
+
+We can also obtain the:
+- frequency response
+	- Plotting the Gain (dB) vs Frequency (Hz) 
+![](../lab3/images/frequency-Response.png)
+
+- filter effect
+	- We intend to see reduced distortion which can be simulated with random data points and plotting both (overlay).
+![](../lab3/images/DataSimulation.png)
+
+The images above show this for `Num_taps = 45` 
+
 ---
 ## Challenge: FIR optimisation
+With more taps, the execution time increases linearly. Since Nios/e does not have support for floating point operations, current multiplication and addition operations are performed via fixed point, resulting in the sampling rate decreasing.
+
+System performance can therefore be increased by converting floating-point operations to fixed-point. This can be achieved by altering the previous implementation with an input - a quantised version of the filter coefficients and perform the necessary operations under fixed point.
+
+The current method to filter the values using the FIR filter is by using a buffer with a moving average and performing the convolution (i.e. dot production - addition and multiplication) with the coefficients for the n tap filter to find the filtered value:
+```C {.line-numbers}
+float fir_filter(float current_reading) {
+	static float buffer[NUM_TAPS] = {0};
+	static int buffer_index = 0;
+	float coefficients[NUM_TAPS] = {0.2, 0.2, 0.2, 0.2, 0.2};
+	float output = 0.0;
+	buffer[buffer_index] = current_reading;
+	for (int i = 0; i < NUM_TAPS; i++) {
+		output += coefficients[i] * buffer[(buffer_index - i + NUM_TAPS) % NUM_TAPS];
+	}
+	buffer_index = (buffer_index + 1) % NUM_TAPS;
+	return output;
+}
+```
+
+### Quantise coefficients
+By referencing coefficients as float data types, and the buffer also being float, it results in floating point multiplication resulting in a much higher time complexity than integer multiplication, with performance degrading as number of taps increases.
+
+So we need to convert values like `0.2` to fixed point integers.
+
+One way to do this is to recognise that floating point values follow the IEEE-754 standard. This is a single precision value:
+![](../lab3/images/IEEE754.png)
+Similarly, we can define a mantissa and an exponent.
+So while storing the values, we have $x \times 2^{exponent}$ which is in integer form (normalising the mantissa). We can keep the values in this form for multiplication since the exponent is constant and we can dequantise the output prior to return values.
+Using a `Q15.16` format ([a standard which optimises the range and precision for low cost DSPs](https://www.allaboutcircuits.com/technical-articles/fixed-point-representation-the-q-format-and-addition-examples/)) -> a total of 32 bits, we can define a `Q` value of `16`, and the `exponent` = $2^Q$ = `1 << Q`.
+Then applying these on all the inputs defined as `int32_t`.
+
+This means that our outputs are 32 + 32 = 64 bits.
+
+> To get these data types in C, we need to add the `<stdint.h>` library.
+
+**Libraries and constants**
+```C
+#include <stdint.h>
+
+#define NUM_TAPS 5
+#define Q 16
+#define EXPONENT (1 << Q)
+```
+
+**Variable declarations**
+```C
+    static int32_t buffer[NUM_TAPS] = {0};
+    static int buffer_index = 0;
+    const int32_t coefficients[NUM_TAPS] = {
+        (int32_t)(0.2 * EXPONENT), 
+        (int32_t)(0.2 * EXPONENT),
+        (int32_t)(0.2 * EXPONENT),
+        (int32_t)(0.2 * EXPONENT),
+        (int32_t)(0.2 * EXPONENT)
+    };
+	int64_t output = 0;
+```
+
+**Dequantisation**
+```C
+    return (int32_t)(output / EXPONENT);
+```
+
+Wrapping these inside the function `fir_filter_fixed` and adding the previous functionality, we can obtain the complete function:
+```C
+#include <stdint.h>
+
+#define NUM_TAPS 5
+#define Q 16
+#define EXPONENT (1 << Q)
+
+int32_t fir_filter_fixed(int32_t current_reading) {
+
+    static int32_t buffer[NUM_TAPS] = {0};
+    static int buffer_index = 0;
+
+    const int32_t coefficients[NUM_TAPS] = {
+        (int32_t)(0.2 * EXPONENT), 
+        (int32_t)(0.2 * EXPONENT),
+        (int32_t)(0.2 * EXPONENT),
+        (int32_t)(0.2 * EXPONENT),
+        (int32_t)(0.2 * EXPONENT)
+    };
+
+    buffer[buffer_index] = current_reading;
+
+    int64_t output = 0;
+    for (int i = 0; i < NUM_TAPS; i++) {
+        output += (int64_t)coefficients[i] * buffer[(buffer_index - i + NUM_TAPS) % NUM_TAPS];
+    }
+
+    buffer_index = (buffer_index + 1) % NUM_TAPS;
+    return (int32_t)(output / EXPONENT);
+}
+```
+
+
+### Results and acquiring a quantitative metric
+While we can clearly see a visual difference in speed since the optimised FIR is , we also need a quantitative metric to provide further information on each system's performance i.e. the time per sample or the sampling rate. 
+We can use the method above, but after numerous attempts - there seems to be an issue with my RTC locally. Instead I am attempting to use the in built clock.
+This should still provide a reasonable estimate since the % error is still far too low.
+
+Using the system RTC, we use my CPU's clock rate which is $2.2 G Hz$, in the worst case scenario if the sampling frequency is $3200 Hz$ then there is an error of $1.45 \times 10^{-6} \space \%$. 
+Using the FPGA's clock rate of $50MHz$, this becomes an error of $64 \times 10^{-6} \space \%$ which is still negligible when considering sampling frequencies of 800 to 3200 Hz.
+
+>[!NOTE]
+>After several tries, there seems to be a local issue as the time continues to be 0. After reconfiguring the hardware ([../lab3/CLOCKED](../lab3/CLOCKED)) and adding a second timer for the sampling frequency, it results in a time period of 65535635, test using:
+>```C
+>alt_u16 period_low = IORD_ALTERA_AVALON_TIMER_PERIODL(TIMER1_BASE);
+>alt_u16 period_high = IORD_ALTERA_AVALON_TIMER_PERIODH(TIMER1_BASE);
+>printf("Timer Period: %u%u\n", period_high, period_low);
+>``` 
+>Which is not correct since the low and high period registers are initialised to `0xFFFFFFFF` = 4294967295 suggesting a potential memory corruption or a configuration error.
+
+
+| Model                  | Average sampling frequency |
+| ---------------------- | -------------------------- |
+| Initial (no filtering) |                            |
+| FIR Filter             |                            |
+| Optimised FIR          |                            |
+

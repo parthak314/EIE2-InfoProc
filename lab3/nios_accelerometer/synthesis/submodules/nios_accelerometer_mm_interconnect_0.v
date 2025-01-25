@@ -7,7 +7,7 @@
 
 `timescale 1 ps / 1 ps
 module nios_accelerometer_mm_interconnect_0 (
-		input  wire        clk_clk_clk,                                                       //                                               clk_clk.clk
+		input  wire        clk_0_clk_clk,                                                     //                                             clk_0_clk.clk
 		input  wire        cpu_reset_reset_bridge_in_reset_reset,                             //                       cpu_reset_reset_bridge_in_reset.reset
 		input  wire [17:0] cpu_data_master_address,                                           //                                       cpu_data_master.address
 		output wire        cpu_data_master_waitrequest,                                       //                                                      .waitrequest
@@ -528,7 +528,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.AV_LINEWRAPBURSTS           (0),
 		.AV_REGISTERINCOMINGSIGNALS  (1)
 	) cpu_data_master_translator (
-		.clk                    (clk_clk_clk),                                                        //                       clk.clk
+		.clk                    (clk_0_clk_clk),                                                      //                       clk.clk
 		.reset                  (cpu_reset_reset_bridge_in_reset_reset),                              //                     reset.reset
 		.uav_address            (cpu_data_master_translator_avalon_universal_master_0_address),       // avalon_universal_master_0.address
 		.uav_burstcount         (cpu_data_master_translator_avalon_universal_master_0_burstcount),    //                          .burstcount
@@ -588,7 +588,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.AV_LINEWRAPBURSTS           (1),
 		.AV_REGISTERINCOMINGSIGNALS  (0)
 	) cpu_instruction_master_translator (
-		.clk                    (clk_clk_clk),                                                               //                       clk.clk
+		.clk                    (clk_0_clk_clk),                                                             //                       clk.clk
 		.reset                  (cpu_reset_reset_bridge_in_reset_reset),                                     //                     reset.reset
 		.uav_address            (cpu_instruction_master_translator_avalon_universal_master_0_address),       // avalon_universal_master_0.address
 		.uav_burstcount         (cpu_instruction_master_translator_avalon_universal_master_0_burstcount),    //                          .burstcount
@@ -650,7 +650,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.AV_SETUP_WAIT_CYCLES           (0),
 		.AV_DATA_HOLD_CYCLES            (0)
 	) accelerometer_spi_avalon_accelerometer_spi_mode_slave_translator (
-		.clk                    (clk_clk_clk),                                                                  //                      clk.clk
+		.clk                    (clk_0_clk_clk),                                                                //                      clk.clk
 		.reset                  (cpu_reset_reset_bridge_in_reset_reset),                                        //                    reset.reset
 		.uav_address            (accelerometer_spi_avalon_accelerometer_spi_mode_slave_agent_m0_address),       // avalon_universal_slave_0.address
 		.uav_burstcount         (accelerometer_spi_avalon_accelerometer_spi_mode_slave_agent_m0_burstcount),    //                         .burstcount
@@ -714,7 +714,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.AV_SETUP_WAIT_CYCLES           (0),
 		.AV_DATA_HOLD_CYCLES            (0)
 	) jtag_uart_avalon_jtag_slave_translator (
-		.clk                    (clk_clk_clk),                                        //                      clk.clk
+		.clk                    (clk_0_clk_clk),                                      //                      clk.clk
 		.reset                  (cpu_reset_reset_bridge_in_reset_reset),              //                    reset.reset
 		.uav_address            (jtag_uart_avalon_jtag_slave_agent_m0_address),       // avalon_universal_slave_0.address
 		.uav_burstcount         (jtag_uart_avalon_jtag_slave_agent_m0_burstcount),    //                         .burstcount
@@ -778,7 +778,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.AV_SETUP_WAIT_CYCLES           (0),
 		.AV_DATA_HOLD_CYCLES            (0)
 	) cpu_debug_mem_slave_translator (
-		.clk                    (clk_clk_clk),                                //                      clk.clk
+		.clk                    (clk_0_clk_clk),                              //                      clk.clk
 		.reset                  (cpu_reset_reset_bridge_in_reset_reset),      //                    reset.reset
 		.uav_address            (cpu_debug_mem_slave_agent_m0_address),       // avalon_universal_slave_0.address
 		.uav_burstcount         (cpu_debug_mem_slave_agent_m0_burstcount),    //                         .burstcount
@@ -842,7 +842,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.AV_SETUP_WAIT_CYCLES           (0),
 		.AV_DATA_HOLD_CYCLES            (0)
 	) onchip_memory_s1_translator (
-		.clk                    (clk_clk_clk),                             //                      clk.clk
+		.clk                    (clk_0_clk_clk),                           //                      clk.clk
 		.reset                  (cpu_reset_reset_bridge_in_reset_reset),   //                    reset.reset
 		.uav_address            (onchip_memory_s1_agent_m0_address),       // avalon_universal_slave_0.address
 		.uav_burstcount         (onchip_memory_s1_agent_m0_burstcount),    //                         .burstcount
@@ -906,7 +906,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.AV_SETUP_WAIT_CYCLES           (0),
 		.AV_DATA_HOLD_CYCLES            (0)
 	) led_s1_translator (
-		.clk                    (clk_clk_clk),                           //                      clk.clk
+		.clk                    (clk_0_clk_clk),                         //                      clk.clk
 		.reset                  (cpu_reset_reset_bridge_in_reset_reset), //                    reset.reset
 		.uav_address            (led_s1_agent_m0_address),               // avalon_universal_slave_0.address
 		.uav_burstcount         (led_s1_agent_m0_burstcount),            //                         .burstcount
@@ -970,7 +970,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.AV_SETUP_WAIT_CYCLES           (0),
 		.AV_DATA_HOLD_CYCLES            (0)
 	) timer_s1_translator (
-		.clk                    (clk_clk_clk),                           //                      clk.clk
+		.clk                    (clk_0_clk_clk),                         //                      clk.clk
 		.reset                  (cpu_reset_reset_bridge_in_reset_reset), //                    reset.reset
 		.uav_address            (timer_s1_agent_m0_address),             // avalon_universal_slave_0.address
 		.uav_burstcount         (timer_s1_agent_m0_burstcount),          //                         .burstcount
@@ -1060,7 +1060,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.USE_READRESPONSE          (0),
 		.USE_WRITERESPONSE         (0)
 	) cpu_data_master_agent (
-		.clk                   (clk_clk_clk),                                                        //       clk.clk
+		.clk                   (clk_0_clk_clk),                                                      //       clk.clk
 		.reset                 (cpu_reset_reset_bridge_in_reset_reset),                              // clk_reset.reset
 		.av_address            (cpu_data_master_translator_avalon_universal_master_0_address),       //        av.address
 		.av_write              (cpu_data_master_translator_avalon_universal_master_0_write),         //          .write
@@ -1141,7 +1141,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.USE_READRESPONSE          (0),
 		.USE_WRITERESPONSE         (0)
 	) cpu_instruction_master_agent (
-		.clk                   (clk_clk_clk),                                                               //       clk.clk
+		.clk                   (clk_0_clk_clk),                                                             //       clk.clk
 		.reset                 (cpu_reset_reset_bridge_in_reset_reset),                                     // clk_reset.reset
 		.av_address            (cpu_instruction_master_translator_avalon_universal_master_0_address),       //        av.address
 		.av_write              (cpu_instruction_master_translator_avalon_universal_master_0_write),         //          .write
@@ -1208,7 +1208,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.USE_WRITERESPONSE         (0),
 		.ECC_ENABLE                (0)
 	) accelerometer_spi_avalon_accelerometer_spi_mode_slave_agent (
-		.clk                     (clk_clk_clk),                                                                               //             clk.clk
+		.clk                     (clk_0_clk_clk),                                                                             //             clk.clk
 		.reset                   (cpu_reset_reset_bridge_in_reset_reset),                                                     //       clk_reset.reset
 		.m0_address              (accelerometer_spi_avalon_accelerometer_spi_mode_slave_agent_m0_address),                    //              m0.address
 		.m0_burstcount           (accelerometer_spi_avalon_accelerometer_spi_mode_slave_agent_m0_burstcount),                 //                .burstcount
@@ -1267,7 +1267,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.USE_ALMOST_FULL_IF  (0),
 		.USE_ALMOST_EMPTY_IF (0)
 	) accelerometer_spi_avalon_accelerometer_spi_mode_slave_agent_rsp_fifo (
-		.clk               (clk_clk_clk),                                                                            //       clk.clk
+		.clk               (clk_0_clk_clk),                                                                          //       clk.clk
 		.reset             (cpu_reset_reset_bridge_in_reset_reset),                                                  // clk_reset.reset
 		.in_data           (accelerometer_spi_avalon_accelerometer_spi_mode_slave_agent_rf_source_data),             //        in.data
 		.in_valid          (accelerometer_spi_avalon_accelerometer_spi_mode_slave_agent_rf_source_valid),            //          .valid
@@ -1333,7 +1333,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.USE_WRITERESPONSE         (0),
 		.ECC_ENABLE                (0)
 	) jtag_uart_avalon_jtag_slave_agent (
-		.clk                     (clk_clk_clk),                                                  //             clk.clk
+		.clk                     (clk_0_clk_clk),                                                //             clk.clk
 		.reset                   (cpu_reset_reset_bridge_in_reset_reset),                        //       clk_reset.reset
 		.m0_address              (jtag_uart_avalon_jtag_slave_agent_m0_address),                 //              m0.address
 		.m0_burstcount           (jtag_uart_avalon_jtag_slave_agent_m0_burstcount),              //                .burstcount
@@ -1392,7 +1392,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.USE_ALMOST_FULL_IF  (0),
 		.USE_ALMOST_EMPTY_IF (0)
 	) jtag_uart_avalon_jtag_slave_agent_rsp_fifo (
-		.clk               (clk_clk_clk),                                                  //       clk.clk
+		.clk               (clk_0_clk_clk),                                                //       clk.clk
 		.reset             (cpu_reset_reset_bridge_in_reset_reset),                        // clk_reset.reset
 		.in_data           (jtag_uart_avalon_jtag_slave_agent_rf_source_data),             //        in.data
 		.in_valid          (jtag_uart_avalon_jtag_slave_agent_rf_source_valid),            //          .valid
@@ -1458,7 +1458,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.USE_WRITERESPONSE         (0),
 		.ECC_ENABLE                (0)
 	) cpu_debug_mem_slave_agent (
-		.clk                     (clk_clk_clk),                                          //             clk.clk
+		.clk                     (clk_0_clk_clk),                                        //             clk.clk
 		.reset                   (cpu_reset_reset_bridge_in_reset_reset),                //       clk_reset.reset
 		.m0_address              (cpu_debug_mem_slave_agent_m0_address),                 //              m0.address
 		.m0_burstcount           (cpu_debug_mem_slave_agent_m0_burstcount),              //                .burstcount
@@ -1517,7 +1517,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.USE_ALMOST_FULL_IF  (0),
 		.USE_ALMOST_EMPTY_IF (0)
 	) cpu_debug_mem_slave_agent_rsp_fifo (
-		.clk               (clk_clk_clk),                                          //       clk.clk
+		.clk               (clk_0_clk_clk),                                        //       clk.clk
 		.reset             (cpu_reset_reset_bridge_in_reset_reset),                // clk_reset.reset
 		.in_data           (cpu_debug_mem_slave_agent_rf_source_data),             //        in.data
 		.in_valid          (cpu_debug_mem_slave_agent_rf_source_valid),            //          .valid
@@ -1583,7 +1583,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.USE_WRITERESPONSE         (0),
 		.ECC_ENABLE                (0)
 	) onchip_memory_s1_agent (
-		.clk                     (clk_clk_clk),                                       //             clk.clk
+		.clk                     (clk_0_clk_clk),                                     //             clk.clk
 		.reset                   (cpu_reset_reset_bridge_in_reset_reset),             //       clk_reset.reset
 		.m0_address              (onchip_memory_s1_agent_m0_address),                 //              m0.address
 		.m0_burstcount           (onchip_memory_s1_agent_m0_burstcount),              //                .burstcount
@@ -1642,7 +1642,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.USE_ALMOST_FULL_IF  (0),
 		.USE_ALMOST_EMPTY_IF (0)
 	) onchip_memory_s1_agent_rsp_fifo (
-		.clk               (clk_clk_clk),                                       //       clk.clk
+		.clk               (clk_0_clk_clk),                                     //       clk.clk
 		.reset             (cpu_reset_reset_bridge_in_reset_reset),             // clk_reset.reset
 		.in_data           (onchip_memory_s1_agent_rf_source_data),             //        in.data
 		.in_valid          (onchip_memory_s1_agent_rf_source_valid),            //          .valid
@@ -1708,7 +1708,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.USE_WRITERESPONSE         (0),
 		.ECC_ENABLE                (0)
 	) led_s1_agent (
-		.clk                     (clk_clk_clk),                             //             clk.clk
+		.clk                     (clk_0_clk_clk),                           //             clk.clk
 		.reset                   (cpu_reset_reset_bridge_in_reset_reset),   //       clk_reset.reset
 		.m0_address              (led_s1_agent_m0_address),                 //              m0.address
 		.m0_burstcount           (led_s1_agent_m0_burstcount),              //                .burstcount
@@ -1767,7 +1767,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.USE_ALMOST_FULL_IF  (0),
 		.USE_ALMOST_EMPTY_IF (0)
 	) led_s1_agent_rsp_fifo (
-		.clk               (clk_clk_clk),                             //       clk.clk
+		.clk               (clk_0_clk_clk),                           //       clk.clk
 		.reset             (cpu_reset_reset_bridge_in_reset_reset),   // clk_reset.reset
 		.in_data           (led_s1_agent_rf_source_data),             //        in.data
 		.in_valid          (led_s1_agent_rf_source_valid),            //          .valid
@@ -1833,7 +1833,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.USE_WRITERESPONSE         (0),
 		.ECC_ENABLE                (0)
 	) timer_s1_agent (
-		.clk                     (clk_clk_clk),                               //             clk.clk
+		.clk                     (clk_0_clk_clk),                             //             clk.clk
 		.reset                   (cpu_reset_reset_bridge_in_reset_reset),     //       clk_reset.reset
 		.m0_address              (timer_s1_agent_m0_address),                 //              m0.address
 		.m0_burstcount           (timer_s1_agent_m0_burstcount),              //                .burstcount
@@ -1892,7 +1892,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.USE_ALMOST_FULL_IF  (0),
 		.USE_ALMOST_EMPTY_IF (0)
 	) timer_s1_agent_rsp_fifo (
-		.clk               (clk_clk_clk),                               //       clk.clk
+		.clk               (clk_0_clk_clk),                             //       clk.clk
 		.reset             (cpu_reset_reset_bridge_in_reset_reset),     // clk_reset.reset
 		.in_data           (timer_s1_agent_rf_source_data),             //        in.data
 		.in_valid          (timer_s1_agent_rf_source_valid),            //          .valid
@@ -1925,7 +1925,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.sink_data          (cpu_data_master_agent_cp_data),          //          .data
 		.sink_startofpacket (cpu_data_master_agent_cp_startofpacket), //          .startofpacket
 		.sink_endofpacket   (cpu_data_master_agent_cp_endofpacket),   //          .endofpacket
-		.clk                (clk_clk_clk),                            //       clk.clk
+		.clk                (clk_0_clk_clk),                          //       clk.clk
 		.reset              (cpu_reset_reset_bridge_in_reset_reset),  // clk_reset.reset
 		.src_ready          (router_src_ready),                       //       src.ready
 		.src_valid          (router_src_valid),                       //          .valid
@@ -1941,7 +1941,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.sink_data          (cpu_instruction_master_agent_cp_data),          //          .data
 		.sink_startofpacket (cpu_instruction_master_agent_cp_startofpacket), //          .startofpacket
 		.sink_endofpacket   (cpu_instruction_master_agent_cp_endofpacket),   //          .endofpacket
-		.clk                (clk_clk_clk),                                   //       clk.clk
+		.clk                (clk_0_clk_clk),                                 //       clk.clk
 		.reset              (cpu_reset_reset_bridge_in_reset_reset),         // clk_reset.reset
 		.src_ready          (router_001_src_ready),                          //       src.ready
 		.src_valid          (router_001_src_valid),                          //          .valid
@@ -1957,7 +1957,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.sink_data          (accelerometer_spi_avalon_accelerometer_spi_mode_slave_agent_rp_data),          //          .data
 		.sink_startofpacket (accelerometer_spi_avalon_accelerometer_spi_mode_slave_agent_rp_startofpacket), //          .startofpacket
 		.sink_endofpacket   (accelerometer_spi_avalon_accelerometer_spi_mode_slave_agent_rp_endofpacket),   //          .endofpacket
-		.clk                (clk_clk_clk),                                                                  //       clk.clk
+		.clk                (clk_0_clk_clk),                                                                //       clk.clk
 		.reset              (cpu_reset_reset_bridge_in_reset_reset),                                        // clk_reset.reset
 		.src_ready          (router_002_src_ready),                                                         //       src.ready
 		.src_valid          (router_002_src_valid),                                                         //          .valid
@@ -1973,7 +1973,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.sink_data          (jtag_uart_avalon_jtag_slave_agent_rp_data),          //          .data
 		.sink_startofpacket (jtag_uart_avalon_jtag_slave_agent_rp_startofpacket), //          .startofpacket
 		.sink_endofpacket   (jtag_uart_avalon_jtag_slave_agent_rp_endofpacket),   //          .endofpacket
-		.clk                (clk_clk_clk),                                        //       clk.clk
+		.clk                (clk_0_clk_clk),                                      //       clk.clk
 		.reset              (cpu_reset_reset_bridge_in_reset_reset),              // clk_reset.reset
 		.src_ready          (router_003_src_ready),                               //       src.ready
 		.src_valid          (router_003_src_valid),                               //          .valid
@@ -1989,7 +1989,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.sink_data          (cpu_debug_mem_slave_agent_rp_data),          //          .data
 		.sink_startofpacket (cpu_debug_mem_slave_agent_rp_startofpacket), //          .startofpacket
 		.sink_endofpacket   (cpu_debug_mem_slave_agent_rp_endofpacket),   //          .endofpacket
-		.clk                (clk_clk_clk),                                //       clk.clk
+		.clk                (clk_0_clk_clk),                              //       clk.clk
 		.reset              (cpu_reset_reset_bridge_in_reset_reset),      // clk_reset.reset
 		.src_ready          (router_004_src_ready),                       //       src.ready
 		.src_valid          (router_004_src_valid),                       //          .valid
@@ -2005,7 +2005,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.sink_data          (onchip_memory_s1_agent_rp_data),          //          .data
 		.sink_startofpacket (onchip_memory_s1_agent_rp_startofpacket), //          .startofpacket
 		.sink_endofpacket   (onchip_memory_s1_agent_rp_endofpacket),   //          .endofpacket
-		.clk                (clk_clk_clk),                             //       clk.clk
+		.clk                (clk_0_clk_clk),                           //       clk.clk
 		.reset              (cpu_reset_reset_bridge_in_reset_reset),   // clk_reset.reset
 		.src_ready          (router_005_src_ready),                    //       src.ready
 		.src_valid          (router_005_src_valid),                    //          .valid
@@ -2021,7 +2021,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.sink_data          (led_s1_agent_rp_data),                  //          .data
 		.sink_startofpacket (led_s1_agent_rp_startofpacket),         //          .startofpacket
 		.sink_endofpacket   (led_s1_agent_rp_endofpacket),           //          .endofpacket
-		.clk                (clk_clk_clk),                           //       clk.clk
+		.clk                (clk_0_clk_clk),                         //       clk.clk
 		.reset              (cpu_reset_reset_bridge_in_reset_reset), // clk_reset.reset
 		.src_ready          (router_006_src_ready),                  //       src.ready
 		.src_valid          (router_006_src_valid),                  //          .valid
@@ -2037,7 +2037,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.sink_data          (timer_s1_agent_rp_data),                //          .data
 		.sink_startofpacket (timer_s1_agent_rp_startofpacket),       //          .startofpacket
 		.sink_endofpacket   (timer_s1_agent_rp_endofpacket),         //          .endofpacket
-		.clk                (clk_clk_clk),                           //       clk.clk
+		.clk                (clk_0_clk_clk),                         //       clk.clk
 		.reset              (cpu_reset_reset_bridge_in_reset_reset), // clk_reset.reset
 		.src_ready          (router_007_src_ready),                  //       src.ready
 		.src_valid          (router_007_src_valid),                  //          .valid
@@ -2081,7 +2081,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.BURSTWRAP_CONST_VALUE     (7),
 		.ADAPTER_VERSION           ("13.1")
 	) accelerometer_spi_avalon_accelerometer_spi_mode_slave_burst_adapter (
-		.clk                   (clk_clk_clk),                                                                               //       cr0.clk
+		.clk                   (clk_0_clk_clk),                                                                             //       cr0.clk
 		.reset                 (cpu_reset_reset_bridge_in_reset_reset),                                                     // cr0_reset.reset
 		.sink0_valid           (accelerometer_spi_avalon_accelerometer_spi_mode_slave_cmd_width_adapter_src_valid),         //     sink0.valid
 		.sink0_data            (accelerometer_spi_avalon_accelerometer_spi_mode_slave_cmd_width_adapter_src_data),          //          .data
@@ -2098,7 +2098,7 @@ module nios_accelerometer_mm_interconnect_0 (
 	);
 
 	nios_accelerometer_mm_interconnect_0_cmd_demux cmd_demux (
-		.clk                (clk_clk_clk),                           //       clk.clk
+		.clk                (clk_0_clk_clk),                         //       clk.clk
 		.reset              (cpu_reset_reset_bridge_in_reset_reset), // clk_reset.reset
 		.sink_ready         (router_src_ready),                      //      sink.ready
 		.sink_channel       (router_src_channel),                    //          .channel
@@ -2145,7 +2145,7 @@ module nios_accelerometer_mm_interconnect_0 (
 	);
 
 	nios_accelerometer_mm_interconnect_0_cmd_demux_001 cmd_demux_001 (
-		.clk                (clk_clk_clk),                           //       clk.clk
+		.clk                (clk_0_clk_clk),                         //       clk.clk
 		.reset              (cpu_reset_reset_bridge_in_reset_reset), // clk_reset.reset
 		.sink_ready         (router_001_src_ready),                  //      sink.ready
 		.sink_channel       (router_001_src_channel),                //          .channel
@@ -2168,7 +2168,7 @@ module nios_accelerometer_mm_interconnect_0 (
 	);
 
 	nios_accelerometer_mm_interconnect_0_cmd_mux cmd_mux (
-		.clk                 (clk_clk_clk),                           //       clk.clk
+		.clk                 (clk_0_clk_clk),                         //       clk.clk
 		.reset               (cpu_reset_reset_bridge_in_reset_reset), // clk_reset.reset
 		.src_ready           (cmd_mux_src_ready),                     //       src.ready
 		.src_valid           (cmd_mux_src_valid),                     //          .valid
@@ -2185,7 +2185,7 @@ module nios_accelerometer_mm_interconnect_0 (
 	);
 
 	nios_accelerometer_mm_interconnect_0_cmd_mux cmd_mux_001 (
-		.clk                 (clk_clk_clk),                           //       clk.clk
+		.clk                 (clk_0_clk_clk),                         //       clk.clk
 		.reset               (cpu_reset_reset_bridge_in_reset_reset), // clk_reset.reset
 		.src_ready           (cmd_mux_001_src_ready),                 //       src.ready
 		.src_valid           (cmd_mux_001_src_valid),                 //          .valid
@@ -2202,7 +2202,7 @@ module nios_accelerometer_mm_interconnect_0 (
 	);
 
 	nios_accelerometer_mm_interconnect_0_cmd_mux_002 cmd_mux_002 (
-		.clk                 (clk_clk_clk),                           //       clk.clk
+		.clk                 (clk_0_clk_clk),                         //       clk.clk
 		.reset               (cpu_reset_reset_bridge_in_reset_reset), // clk_reset.reset
 		.src_ready           (cmd_mux_002_src_ready),                 //       src.ready
 		.src_valid           (cmd_mux_002_src_valid),                 //          .valid
@@ -2225,7 +2225,7 @@ module nios_accelerometer_mm_interconnect_0 (
 	);
 
 	nios_accelerometer_mm_interconnect_0_cmd_mux_002 cmd_mux_003 (
-		.clk                 (clk_clk_clk),                           //       clk.clk
+		.clk                 (clk_0_clk_clk),                         //       clk.clk
 		.reset               (cpu_reset_reset_bridge_in_reset_reset), // clk_reset.reset
 		.src_ready           (cmd_mux_003_src_ready),                 //       src.ready
 		.src_valid           (cmd_mux_003_src_valid),                 //          .valid
@@ -2248,7 +2248,7 @@ module nios_accelerometer_mm_interconnect_0 (
 	);
 
 	nios_accelerometer_mm_interconnect_0_cmd_mux cmd_mux_004 (
-		.clk                 (clk_clk_clk),                           //       clk.clk
+		.clk                 (clk_0_clk_clk),                         //       clk.clk
 		.reset               (cpu_reset_reset_bridge_in_reset_reset), // clk_reset.reset
 		.src_ready           (cmd_mux_004_src_ready),                 //       src.ready
 		.src_valid           (cmd_mux_004_src_valid),                 //          .valid
@@ -2265,7 +2265,7 @@ module nios_accelerometer_mm_interconnect_0 (
 	);
 
 	nios_accelerometer_mm_interconnect_0_cmd_mux cmd_mux_005 (
-		.clk                 (clk_clk_clk),                           //       clk.clk
+		.clk                 (clk_0_clk_clk),                         //       clk.clk
 		.reset               (cpu_reset_reset_bridge_in_reset_reset), // clk_reset.reset
 		.src_ready           (cmd_mux_005_src_ready),                 //       src.ready
 		.src_valid           (cmd_mux_005_src_valid),                 //          .valid
@@ -2282,7 +2282,7 @@ module nios_accelerometer_mm_interconnect_0 (
 	);
 
 	nios_accelerometer_mm_interconnect_0_rsp_demux rsp_demux (
-		.clk                (clk_clk_clk),                                                                               //       clk.clk
+		.clk                (clk_0_clk_clk),                                                                             //       clk.clk
 		.reset              (cpu_reset_reset_bridge_in_reset_reset),                                                     // clk_reset.reset
 		.sink_ready         (accelerometer_spi_avalon_accelerometer_spi_mode_slave_rsp_width_adapter_src_ready),         //      sink.ready
 		.sink_channel       (accelerometer_spi_avalon_accelerometer_spi_mode_slave_rsp_width_adapter_src_channel),       //          .channel
@@ -2299,7 +2299,7 @@ module nios_accelerometer_mm_interconnect_0 (
 	);
 
 	nios_accelerometer_mm_interconnect_0_rsp_demux rsp_demux_001 (
-		.clk                (clk_clk_clk),                           //       clk.clk
+		.clk                (clk_0_clk_clk),                         //       clk.clk
 		.reset              (cpu_reset_reset_bridge_in_reset_reset), // clk_reset.reset
 		.sink_ready         (router_003_src_ready),                  //      sink.ready
 		.sink_channel       (router_003_src_channel),                //          .channel
@@ -2316,7 +2316,7 @@ module nios_accelerometer_mm_interconnect_0 (
 	);
 
 	nios_accelerometer_mm_interconnect_0_cmd_demux_001 rsp_demux_002 (
-		.clk                (clk_clk_clk),                           //       clk.clk
+		.clk                (clk_0_clk_clk),                         //       clk.clk
 		.reset              (cpu_reset_reset_bridge_in_reset_reset), // clk_reset.reset
 		.sink_ready         (router_004_src_ready),                  //      sink.ready
 		.sink_channel       (router_004_src_channel),                //          .channel
@@ -2339,7 +2339,7 @@ module nios_accelerometer_mm_interconnect_0 (
 	);
 
 	nios_accelerometer_mm_interconnect_0_cmd_demux_001 rsp_demux_003 (
-		.clk                (clk_clk_clk),                           //       clk.clk
+		.clk                (clk_0_clk_clk),                         //       clk.clk
 		.reset              (cpu_reset_reset_bridge_in_reset_reset), // clk_reset.reset
 		.sink_ready         (router_005_src_ready),                  //      sink.ready
 		.sink_channel       (router_005_src_channel),                //          .channel
@@ -2362,7 +2362,7 @@ module nios_accelerometer_mm_interconnect_0 (
 	);
 
 	nios_accelerometer_mm_interconnect_0_rsp_demux rsp_demux_004 (
-		.clk                (clk_clk_clk),                           //       clk.clk
+		.clk                (clk_0_clk_clk),                         //       clk.clk
 		.reset              (cpu_reset_reset_bridge_in_reset_reset), // clk_reset.reset
 		.sink_ready         (router_006_src_ready),                  //      sink.ready
 		.sink_channel       (router_006_src_channel),                //          .channel
@@ -2379,7 +2379,7 @@ module nios_accelerometer_mm_interconnect_0 (
 	);
 
 	nios_accelerometer_mm_interconnect_0_rsp_demux rsp_demux_005 (
-		.clk                (clk_clk_clk),                           //       clk.clk
+		.clk                (clk_0_clk_clk),                         //       clk.clk
 		.reset              (cpu_reset_reset_bridge_in_reset_reset), // clk_reset.reset
 		.sink_ready         (router_007_src_ready),                  //      sink.ready
 		.sink_channel       (router_007_src_channel),                //          .channel
@@ -2396,7 +2396,7 @@ module nios_accelerometer_mm_interconnect_0 (
 	);
 
 	nios_accelerometer_mm_interconnect_0_rsp_mux rsp_mux (
-		.clk                 (clk_clk_clk),                           //       clk.clk
+		.clk                 (clk_0_clk_clk),                         //       clk.clk
 		.reset               (cpu_reset_reset_bridge_in_reset_reset), // clk_reset.reset
 		.src_ready           (rsp_mux_src_ready),                     //       src.ready
 		.src_valid           (rsp_mux_src_valid),                     //          .valid
@@ -2443,7 +2443,7 @@ module nios_accelerometer_mm_interconnect_0 (
 	);
 
 	nios_accelerometer_mm_interconnect_0_rsp_mux_001 rsp_mux_001 (
-		.clk                 (clk_clk_clk),                           //       clk.clk
+		.clk                 (clk_0_clk_clk),                         //       clk.clk
 		.reset               (cpu_reset_reset_bridge_in_reset_reset), // clk_reset.reset
 		.src_ready           (rsp_mux_001_src_ready),                 //       src.ready
 		.src_valid           (rsp_mux_001_src_valid),                 //          .valid
@@ -2514,7 +2514,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.PACKING                       (1),
 		.ENABLE_ADDRESS_ALIGNMENT      (0)
 	) accelerometer_spi_avalon_accelerometer_spi_mode_slave_rsp_width_adapter (
-		.clk                  (clk_clk_clk),                                                                               //       clk.clk
+		.clk                  (clk_0_clk_clk),                                                                             //       clk.clk
 		.reset                (cpu_reset_reset_bridge_in_reset_reset),                                                     // clk_reset.reset
 		.in_valid             (router_002_src_valid),                                                                      //      sink.valid
 		.in_channel           (router_002_src_channel),                                                                    //          .channel
@@ -2580,7 +2580,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.PACKING                       (1),
 		.ENABLE_ADDRESS_ALIGNMENT      (0)
 	) accelerometer_spi_avalon_accelerometer_spi_mode_slave_cmd_width_adapter (
-		.clk                  (clk_clk_clk),                                                                               //       clk.clk
+		.clk                  (clk_0_clk_clk),                                                                             //       clk.clk
 		.reset                (cpu_reset_reset_bridge_in_reset_reset),                                                     // clk_reset.reset
 		.in_valid             (cmd_mux_src_valid),                                                                         //      sink.valid
 		.in_channel           (cmd_mux_src_channel),                                                                       //          .channel
@@ -2615,7 +2615,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.outUseReady     (1),
 		.outReadyLatency (0)
 	) avalon_st_adapter (
-		.in_clk_0_clk   (clk_clk_clk),                                                                      // in_clk_0.clk
+		.in_clk_0_clk   (clk_0_clk_clk),                                                                    // in_clk_0.clk
 		.in_rst_0_reset (cpu_reset_reset_bridge_in_reset_reset),                                            // in_rst_0.reset
 		.in_0_data      (accelerometer_spi_avalon_accelerometer_spi_mode_slave_agent_rdata_fifo_src_data),  //     in_0.data
 		.in_0_valid     (accelerometer_spi_avalon_accelerometer_spi_mode_slave_agent_rdata_fifo_src_valid), //         .valid
@@ -2644,7 +2644,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.outUseReady     (1),
 		.outReadyLatency (0)
 	) avalon_st_adapter_001 (
-		.in_clk_0_clk   (clk_clk_clk),                                            // in_clk_0.clk
+		.in_clk_0_clk   (clk_0_clk_clk),                                          // in_clk_0.clk
 		.in_rst_0_reset (cpu_reset_reset_bridge_in_reset_reset),                  // in_rst_0.reset
 		.in_0_data      (jtag_uart_avalon_jtag_slave_agent_rdata_fifo_src_data),  //     in_0.data
 		.in_0_valid     (jtag_uart_avalon_jtag_slave_agent_rdata_fifo_src_valid), //         .valid
@@ -2673,7 +2673,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.outUseReady     (1),
 		.outReadyLatency (0)
 	) avalon_st_adapter_002 (
-		.in_clk_0_clk   (clk_clk_clk),                                    // in_clk_0.clk
+		.in_clk_0_clk   (clk_0_clk_clk),                                  // in_clk_0.clk
 		.in_rst_0_reset (cpu_reset_reset_bridge_in_reset_reset),          // in_rst_0.reset
 		.in_0_data      (cpu_debug_mem_slave_agent_rdata_fifo_src_data),  //     in_0.data
 		.in_0_valid     (cpu_debug_mem_slave_agent_rdata_fifo_src_valid), //         .valid
@@ -2702,7 +2702,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.outUseReady     (1),
 		.outReadyLatency (0)
 	) avalon_st_adapter_003 (
-		.in_clk_0_clk   (clk_clk_clk),                                 // in_clk_0.clk
+		.in_clk_0_clk   (clk_0_clk_clk),                               // in_clk_0.clk
 		.in_rst_0_reset (cpu_reset_reset_bridge_in_reset_reset),       // in_rst_0.reset
 		.in_0_data      (onchip_memory_s1_agent_rdata_fifo_src_data),  //     in_0.data
 		.in_0_valid     (onchip_memory_s1_agent_rdata_fifo_src_valid), //         .valid
@@ -2731,7 +2731,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.outUseReady     (1),
 		.outReadyLatency (0)
 	) avalon_st_adapter_004 (
-		.in_clk_0_clk   (clk_clk_clk),                           // in_clk_0.clk
+		.in_clk_0_clk   (clk_0_clk_clk),                         // in_clk_0.clk
 		.in_rst_0_reset (cpu_reset_reset_bridge_in_reset_reset), // in_rst_0.reset
 		.in_0_data      (led_s1_agent_rdata_fifo_src_data),      //     in_0.data
 		.in_0_valid     (led_s1_agent_rdata_fifo_src_valid),     //         .valid
@@ -2760,7 +2760,7 @@ module nios_accelerometer_mm_interconnect_0 (
 		.outUseReady     (1),
 		.outReadyLatency (0)
 	) avalon_st_adapter_005 (
-		.in_clk_0_clk   (clk_clk_clk),                           // in_clk_0.clk
+		.in_clk_0_clk   (clk_0_clk_clk),                         // in_clk_0.clk
 		.in_rst_0_reset (cpu_reset_reset_bridge_in_reset_reset), // in_rst_0.reset
 		.in_0_data      (timer_s1_agent_rdata_fifo_src_data),    //     in_0.data
 		.in_0_valid     (timer_s1_agent_rdata_fifo_src_valid),   //         .valid

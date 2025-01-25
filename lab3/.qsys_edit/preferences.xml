@@ -5,9 +5,9 @@
   <columns>
    <connections preferredWidth="143" />
    <irq preferredWidth="34" />
-   <name preferredWidth="189" />
   </columns>
  </systemtable>
- <library expandedCategories="Project,Library" />
+ <library
+   expandedCategories="Library/Interface Protocols,Library/Basic Functions,Library/Interface Protocols/Ethernet,Library/Interface Protocols/Ethernet/Reference Design Components,Library/Basic Functions/Bridges and Adaptors,Project,Library/Processors and Peripherals/Peripherals,Library/Processors and Peripherals,Library/Basic Functions/Bridges and Adaptors/Memory Mapped,Library" />
  <window width="2418" height="1318" x="2391" y="-9" />
 </preferences>

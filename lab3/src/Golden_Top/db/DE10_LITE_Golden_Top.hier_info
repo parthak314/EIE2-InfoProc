@@ -9436,7 +9436,7 @@ readdata[15] <= readdata[15]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |DE10_LITE_Golden_Top|nios_accelerometer:u0|nios_accelerometer_mm_interconnect_0:mm_interconnect_0
-clk_clk_clk => clk_clk_clk.IN55
+clk_0_clk_clk => clk_0_clk_clk.IN55
 cpu_reset_reset_bridge_in_reset_reset => cpu_reset_reset_bridge_in_reset_reset.IN55
 cpu_data_master_address[0] => cpu_data_master_address[0].IN1
 cpu_data_master_address[1] => cpu_data_master_address[1].IN1
@@ -31744,12 +31744,12 @@ reset_n => ~NO_FANOUT~
 |DE10_LITE_Golden_Top|nios_accelerometer:u0|nios_accelerometer_irq_mapper:irq_mapper
 clk => ~NO_FANOUT~
 reset => ~NO_FANOUT~
-receiver0_irq => sender_irq[1].DATAIN
+receiver0_irq => sender_irq[2].DATAIN
 receiver1_irq => sender_irq[0].DATAIN
-receiver2_irq => sender_irq[2].DATAIN
+receiver2_irq => sender_irq[1].DATAIN
 sender_irq[0] <= receiver1_irq.DB_MAX_OUTPUT_PORT_TYPE
-sender_irq[1] <= receiver0_irq.DB_MAX_OUTPUT_PORT_TYPE
-sender_irq[2] <= receiver2_irq.DB_MAX_OUTPUT_PORT_TYPE
+sender_irq[1] <= receiver2_irq.DB_MAX_OUTPUT_PORT_TYPE
+sender_irq[2] <= receiver0_irq.DB_MAX_OUTPUT_PORT_TYPE
 sender_irq[3] <= <GND>
 sender_irq[4] <= <GND>
 sender_irq[5] <= <GND>

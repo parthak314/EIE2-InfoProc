@@ -1,21 +1,33 @@
-19:47:39 **** Incremental Build of configuration Nios II for project Nios-ii-accelerometer ****
+12:51:25 **** Incremental Build of configuration Nios II for project nios_ii_accelerometer ****
 make all 
-Info: Building ../Nios-ii-accelerometer_bsp/
-C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../Nios-ii-accelerometer_bsp/
+Info: Building ../nios_ii_accelerometer_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../nios_ii_accelerometer_bsp/
 [BSP build complete]
 Info: Compiling hello_world_small.c to obj/default/hello_world_small.o
-nios2-elf-gcc -xc -MP -MMD -c -I../Nios-ii-accelerometer_bsp//HAL/inc -I../Nios-ii-accelerometer_bsp/ -I../Nios-ii-accelerometer_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_C_PLUS_PLUS -DALT_NO_CLEAN_EXIT -D'exit(a)=_exit(a)' -DALT_NO_EXIT -DALT_USE_DIRECT_DRIVERS -DALT_NO_INSTRUCTION_EMULATION -DALT_USE_SMALL_DRIVERS -DSMALL_C_LIB -DALT_SINGLE_THREADED    -Os -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/hello_world_small.o hello_world_small.c
-Info: Linking Nios-ii-accelerometer.elf
-nios2-elf-g++  -T'../Nios-ii-accelerometer_bsp//linker.x' -msys-crt0='../Nios-ii-accelerometer_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../Nios-ii-accelerometer_bsp/  -msmallc  -Wl,-Map=Nios-ii-accelerometer.map   -Os -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o Nios-ii-accelerometer.elf obj/default/hello_world_small.o -lm -msys-lib=m
-nios2-elf-insert Nios-ii-accelerometer.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name nios_accelerometer --quartus_project_dir "C:/Users/Parth/Downloads/EIE2-InfoProc/lab3/src/Golden_Top" --jdi C:/Users/Parth/Downloads/EIE2-InfoProc/lab3/src/Golden_Top/software/Nios-ii-accelerometer_bsp/../../DE10_LITE_Golden_Top.jdi --sopcinfo C:/Users/Parth/Downloads/EIE2-InfoProc/lab3/src/Golden_Top/software/Nios-ii-accelerometer_bsp/../../nios_accelerometer.sopcinfo
-Info: (Nios-ii-accelerometer.elf) 6472 Bytes program size (code + initialized data).
-Info:                             57 KBytes free for stack + heap.
-Info: Creating Nios-ii-accelerometer.objdump
-nios2-elf-objdump --disassemble --syms --all-header --source Nios-ii-accelerometer.elf >Nios-ii-accelerometer.objdump
-[Nios-ii-accelerometer build complete]
-19:48:07 **** Incremental Build of configuration Nios II for project Nios-ii-accelerometer ****
+nios2-elf-gcc -xc -MP -MMD -c -I../nios_ii_accelerometer_bsp//HAL/inc -I../nios_ii_accelerometer_bsp/ -I../nios_ii_accelerometer_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_C_PLUS_PLUS -DALT_NO_CLEAN_EXIT -D'exit(a)=_exit(a)' -DALT_NO_EXIT -DALT_USE_DIRECT_DRIVERS -DALT_NO_INSTRUCTION_EMULATION -DALT_USE_SMALL_DRIVERS -DSMALL_C_LIB -DALT_SINGLE_THREADED    -Os -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/hello_world_small.o hello_world_small.c
+hello_world_small.c: In function 'main':
+hello_world_small.c:104:16: warning: format '%u' expects argument of type 'unsigned int', but argument 2 has type 'alt_u32 {aka long unsigned int}' [-Wformat=]
+         printf("Start: %u, End: %u, Elapsed cycles: %u\n", start_time, end_time, elapsed_cycles);
+                ^
+hello_world_small.c:104:16: warning: format '%u' expects argument of type 'unsigned int', but argument 3 has type 'alt_u32 {aka long unsigned int}' [-Wformat=]
+hello_world_small.c:104:16: warning: format '%u' expects argument of type 'unsigned int', but argument 4 has type 'alt_u32 {aka long unsigned int}' [-Wformat=]
+hello_world_small.c:104:16: warning: format '%u' expects argument of type 'unsigned int', but argument 2 has type 'alt_u32 {aka long unsigned int}' [-Wformat=]
+hello_world_small.c:104:16: warning: format '%u' expects argument of type 'unsigned int', but argument 3 has type 'alt_u32 {aka long unsigned int}' [-Wformat=]
+hello_world_small.c:104:16: warning: format '%u' expects argument of type 'unsigned int', but argument 4 has type 'alt_u32 {aka long unsigned int}' [-Wformat=]
+hello_world_small.c:100:15: warning: unused variable 'elapsed_time' [-Wunused-variable]
+         float elapsed_time = elapsed_cycles / clock_frequency;
+               ^
+Info: Linking nios_ii_accelerometer.elf
+nios2-elf-g++  -T'../nios_ii_accelerometer_bsp//linker.x' -msys-crt0='../nios_ii_accelerometer_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../nios_ii_accelerometer_bsp/  -msmallc  -Wl,-Map=nios_ii_accelerometer.map   -Os -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o nios_ii_accelerometer.elf obj/default/hello_world_small.o -lm -msys-lib=m
+nios2-elf-insert nios_ii_accelerometer.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name nios_accelerometer --quartus_project_dir "C:/Users/Parth/Downloads/EIE2-InfoProc/lab3" --sopcinfo C:/Users/Parth/Downloads/EIE2-InfoProc/lab3/software/nios_ii_accelerometer_bsp/../../nios_accelerometer.sopcinfo
+Info: (nios_ii_accelerometer.elf) 5716 Bytes program size (code + initialized data).
+Info:                             58 KBytes free for stack + heap.
+Info: Creating nios_ii_accelerometer.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source nios_ii_accelerometer.elf >nios_ii_accelerometer.objdump
+[nios_ii_accelerometer build complete]
+12:51:33 **** Incremental Build of configuration Nios II for project nios_ii_accelerometer ****
 make all 
-Info: Building ../Nios-ii-accelerometer_bsp/
-C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../Nios-ii-accelerometer_bsp/
+Info: Building ../nios_ii_accelerometer_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../nios_ii_accelerometer_bsp/
 [BSP build complete]
-[Nios-ii-accelerometer build complete]
+[nios_ii_accelerometer build complete]

@@ -65,8 +65,8 @@ module nios_accelerometer (
 	wire         mm_interconnect_0_timer_s1_write;                                                    // mm_interconnect_0:timer_s1_write -> timer:write_n
 	wire  [15:0] mm_interconnect_0_timer_s1_writedata;                                                // mm_interconnect_0:timer_s1_writedata -> timer:writedata
 	wire         irq_mapper_receiver0_irq;                                                            // accelerometer_spi:irq -> irq_mapper:receiver0_irq
-	wire         irq_mapper_receiver1_irq;                                                            // timer:irq -> irq_mapper:receiver1_irq
-	wire         irq_mapper_receiver2_irq;                                                            // jtag_uart:av_irq -> irq_mapper:receiver2_irq
+	wire         irq_mapper_receiver1_irq;                                                            // jtag_uart:av_irq -> irq_mapper:receiver1_irq
+	wire         irq_mapper_receiver2_irq;                                                            // timer:irq -> irq_mapper:receiver2_irq
 	wire  [31:0] cpu_irq_irq;                                                                         // irq_mapper:sender_irq -> cpu:irq
 	wire         rst_controller_reset_out_reset;                                                      // rst_controller:reset_out -> [accelerometer_spi:reset, cpu:reset_n, irq_mapper:reset, jtag_uart:rst_n, led:reset_n, mm_interconnect_0:cpu_reset_reset_bridge_in_reset_reset, onchip_memory:reset, rst_translator:in_reset, timer:reset_n]
 	wire         rst_controller_reset_out_reset_req;                                                  // rst_controller:reset_req -> [cpu:reset_req, onchip_memory:reset_req, rst_translator:reset_req_in]
@@ -127,7 +127,7 @@ module nios_accelerometer (
 		.av_write_n     (~mm_interconnect_0_jtag_uart_avalon_jtag_slave_write),      //                  .write_n
 		.av_writedata   (mm_interconnect_0_jtag_uart_avalon_jtag_slave_writedata),   //                  .writedata
 		.av_waitrequest (mm_interconnect_0_jtag_uart_avalon_jtag_slave_waitrequest), //                  .waitrequest
-		.av_irq         (irq_mapper_receiver2_irq)                                   //               irq.irq
+		.av_irq         (irq_mapper_receiver1_irq)                                   //               irq.irq
 	);
 
 	nios_accelerometer_led led (
@@ -163,11 +163,11 @@ module nios_accelerometer (
 		.readdata   (mm_interconnect_0_timer_s1_readdata),   //      .readdata
 		.chipselect (mm_interconnect_0_timer_s1_chipselect), //      .chipselect
 		.write_n    (~mm_interconnect_0_timer_s1_write),     //      .write_n
-		.irq        (irq_mapper_receiver1_irq)               //   irq.irq
+		.irq        (irq_mapper_receiver2_irq)               //   irq.irq
 	);
 
 	nios_accelerometer_mm_interconnect_0 mm_interconnect_0 (
-		.clk_clk_clk                                                       (clk_clk),                                                                             //                                               clk_clk.clk
+		.clk_0_clk_clk                                                     (clk_clk),                                                                             //                                             clk_0_clk.clk
 		.cpu_reset_reset_bridge_in_reset_reset                             (rst_controller_reset_out_reset),                                                      //                       cpu_reset_reset_bridge_in_reset.reset
 		.cpu_data_master_address                                           (cpu_data_master_address),                                                             //                                       cpu_data_master.address
 		.cpu_data_master_waitrequest                                       (cpu_data_master_waitrequest),                                                         //                                                      .waitrequest

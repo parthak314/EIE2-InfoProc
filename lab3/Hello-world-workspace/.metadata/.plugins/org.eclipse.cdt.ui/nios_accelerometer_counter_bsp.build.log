@@ -1,0 +1,6 @@
+12:28:08 **** Clean-only build of configuration Nios II for project nios_accelerometer_counter_bsp ****
+make clean 
+[BSP clean complete]
+
+12:28:09 Build Finished (took 943ms)
+

@@ -1,0 +1,75 @@
+#include "system.h"
+#include "altera_up_avalon_accelerometer_spi.h"
+#include "altera_avalon_timer_regs.h"
+#include "altera_avalon_timer.h"
+#include "altera_avalon_pio_regs.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+#define OFFSET -32
+#define PWM_PERIOD 16
+
+alt_8 pwm = 0;
+alt_u8 led;
+int level;
+
+void led_write(alt_u8 led_pattern) {
+    IOWR(LED_BASE, 0, led_pattern);
+}
+
+void convert_read(alt_32 acc_read, int *level, alt_u8 *led) {
+    acc_read += OFFSET;
+    alt_u8 val = (acc_read >> 6) & 0x07;
+    *led = (8 >> val) | (8 << (8 - val));
+    *level = (acc_read >> 1) & 0x1f;
+}
+
+void timer_reset() {
+    IOWR_ALTERA_AVALON_TIMER_SNAPL(TIMER_BASE, 0); // Clear the timer snap registers
+    IOWR_ALTERA_AVALON_TIMER_SNAPH(TIMER_BASE, 0);
+}
+
+alt_u32 timer_read() {
+    // Read the current timer value (concatenate the high and low snap registers)
+    alt_u16 low = IORD_ALTERA_AVALON_TIMER_SNAPL(TIMER_BASE);
+    alt_u16 high = IORD_ALTERA_AVALON_TIMER_SNAPH(TIMER_BASE);
+    return ((alt_u32)high << 16) | low;
+}
+
+int main() {
+    alt_32 x_read;
+    alt_u32 start_time, end_time, elapsed_ticks;
+    alt_up_accelerometer_spi_dev *acc_dev;
+
+    acc_dev = alt_up_accelerometer_spi_open_dev("/dev/accelerometer_spi");
+    if (acc_dev == NULL) { // if return 1, check if the spi ip name is "accelerometer_spi"
+        return 1;
+    }
+
+    // Initialize and start the timer
+    IOWR_ALTERA_AVALON_TIMER_CONTROL(TIMER_BASE, 0x07); // Enable timer, start, and continuous mode
+
+    // Measure the time for reading multiple samples
+    const int sample_count = 1000; // Number of samples to read
+    timer_reset();                 // Reset the timer
+    start_time = timer_read();     // Get the initial timer value
+
+    for (int i = 0; i < sample_count; i++) {
+        alt_up_accelerometer_spi_read_x_axis(acc_dev, &x_read);
+        convert_read(x_read, &level, &led);
+    }
+
+    end_time = timer_read(); // Get the final timer value
+    elapsed_ticks = end_time - start_time;
+
+    // Calculate the sampling frequency (assuming a known clock frequency)
+    float timer_clock_freq = 50e6; // Example: 50 MHz timer clock
+    float elapsed_time_sec = elapsed_ticks / timer_clock_freq;
+    float sampling_frequency = sample_count / elapsed_time_sec;
+
+    printf("Elapsed ticks: %lu\n", elapsed_ticks);
+    printf("Elapsed time: %.6f seconds\n", elapsed_time_sec);
+    printf("Sampling frequency: %.2f Hz\n", sampling_frequency);
+
+    return 0;
+}
