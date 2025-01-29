@@ -169,13 +169,15 @@ Now we can run the C program by right clicking `hello_world_sw` then `Run As > R
 
 > Note that this also had Timestamp mismatch issues, could not find appropriate method to resolve this so is temporarily ignored.
 
+>[!NOTE]
 > To download the `.elf` file, run the batch file in terminal then navigate to the location for the `.elf` file and download it using `nios2-download`:
->     ```bash
-	& 'C:\intelFPGA_lite\18.1std\nios2eds\Nios II Command Shell.bat'
-	cd <your_elf_file_directory>
-	nios2-download -g <your_elf_file_name>.elf
-	```
-
+>   ```bash
+>	& 'C:\intelFPGA_lite\18.1\nios2eds\Nios II Command Shell.bat'
+>
+>	cd <your_elf_file_directory>
+>	
+>	nios2-download -g <your_elf_file_name>.elf
+>	```
 
 Adding the following script will test the STDOUT:
 ```C
