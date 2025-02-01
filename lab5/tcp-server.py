@@ -1,22 +1,25 @@
 import socket
-print("We're in tcp server...")
 
-server_port = 12000
+HOST = "0.0.0.0"  # Listen on all available interfaces
+PORT = 12000      # Must match the client's port
 
-welcome_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-welcome_socket.bind(('0.0.0.0', server_port))
-welcome_socket.listen(1)
+# Create TCP server socket
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
+    server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    server_socket.bind((HOST, PORT))
+    server_socket.listen()
 
-print('Server running on port', server_port)
+    print(f"Server listening on port {PORT}...")
 
-while True:
-    connection_socket, caddr = welcome_socket.accept()
-    
-    cmsg = connection_socket.recv(1024)
-    cmsg = cmsg.decode()
+    conn, addr = server_socket.accept()
+    print(f"Connected by {addr}")
 
-    if not cmsg:
-        break
-    connection_socket.send(cmsg.encode())
+    while True:
+        data = conn.recv(1024)  # Read data from client
+        if not data:
+            print("Client disconnected.")
+            break  # Exit loop if client closes connection
+        
+        print(f"Received: {data.decode()}")  # Debugging message
 
-
+        conn.sendall(data)  # Echo back the data
