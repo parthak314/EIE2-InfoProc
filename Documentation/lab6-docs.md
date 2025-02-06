@@ -201,7 +201,6 @@ sudo su postgres
 psql
 ```
 
-
 ### Using Postgresql
 
 Example commands:
